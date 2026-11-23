@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "DM Sans"; src: url("fonts/DMSans.ttf"); font-weight: 100 1000; }
+@font-face { font-family: "Archivo Black"; src: url("fonts/ArchivoBlack-Regular.ttf"); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1350px; }
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.glow {
+  position: absolute; width: 900px; height: 900px; border-radius: 50%;
+  right: -320px; bottom: -260px;
+  background: radial-gradient(circle, var(--glow) 0%, rgba(0,0,0,0) 65%);
+}
+.road {
+  position: absolute; left: 0; right: 0; bottom: 250px; height: 6px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 60px, transparent 60px 100px);
+}
+.wrap { position: absolute; inset: 0; padding: 84px 84px 0 84px; }
+.brand { display: flex; align-items: center; gap: 18px; }
+.mark {
+  width: 64px; height: 64px; border-radius: 16px; background: var(--accent);
+  display: grid; place-items: center;
+}
+.brand-name { font-family: "Archivo Black"; font-size: 34px; letter-spacing: .5px; line-height: 1; }
+.brand-sub { font-size: 18px; font-weight: 600; letter-spacing: 3px; opacity: .75; margin-top: 6px; }
+.chip {
+  display: inline-block; margin-top: 78px; padding: 12px 24px; border-radius: 999px;
+  background: rgba(255,255,255,.1); border: 2px solid var(--accent);
+  color: var(--accent); font-weight: 700; font-size: 24px; letter-spacing: 2px; text-transform: uppercase;
+}
+h1 {
+  font-family: "Archivo Black"; font-weight: 400;
+  font-size: var(--title-size, 78px); line-height: 1.04; margin-top: 34px; max-width: 900px;
+  letter-spacing: -1px;
+}
+h1 em { font-style: normal; color: var(--accent); }
+.sub { font-size: 34px; line-height: 1.32; margin-top: 30px; max-width: 860px; opacity: .9; font-weight: 400; }
+ul { list-style: none; margin-top: 44px; display: grid; gap: 20px; max-width: 700px; }
+li { display: flex; gap: 18px; align-items: flex-start; font-size: 30px; font-weight: 600; line-height: 1.25; }
+li .ck {
+  flex: 0 0 40px; height: 40px; border-radius: 50%; background: var(--accent);
+  display: grid; place-items: center; margin-top: -2px;
+}
+.illus { position: absolute; right: 40px; bottom: 236px; width: 560px; }
+.footer {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 236px;
+  background: #fff; color: var(--bg);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 84px;
+}
+.cta { font-family: "Archivo Black"; font-size: 40px; line-height: 1.1; max-width: 560px; }
+.site { text-align: right; }
+.site .url { font-size: 28px; font-weight: 800; }
+.site .bio { font-size: 22px; font-weight: 600; opacity: .7; margin-top: 6px; }
+.btn {
+  display: inline-block; margin-top: 14px; background: var(--accent); color: #10233b;
+  padding: 14px 26px; border-radius: 14px; font-size: 24px; font-weight: 800; white-space: nowrap;
+}
+</style>
+</head>
+<body style="--bg:{{bg}};--accent:{{accent}};--glow:{{glow}};--title-size:{{title_size}}">
+  <div class="glow"></div>
+  <div class="road"></div>
+  <div class="illus">{{illustration}}</div>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">
+        <svg width="40" height="40" viewBox="0 0 40 40"><path d="M6 26 L16 12 L22 20 L26 15 L34 26 Z" fill="#10233b"/><circle cx="13" cy="30" r="3.5" fill="#10233b"/><circle cx="28" cy="30" r="3.5" fill="#10233b"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">LEVA E TRAZ</div>
+        <div class="brand-sub">TRANSPORTE · DESDE 1997</div>
+      </div>
+    </div>
+    <div class="chip">{{chip}}</div>
+    <h1>{{title}}</h1>
+    <p class="sub">{{subtitle}}</p>
+    <ul>{{bullets}}</ul>
+  </div>
+  <div class="footer">
+    <div class="cta">{{cta}}</div>
+    <div class="site">
+      <div class="url">levaetraztransporte.com.br</div>
+      <div class="bio">@levaetraz.transporte</div>
+      <div class="btn">Orçamento sem compromisso</div>
+    </div>
+  </div>
+</body>
+</html>
