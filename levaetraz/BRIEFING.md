@@ -31,4 +31,6 @@ Este arquivo orienta a tarefa agendada que cria e publica os posts. Ele é a ref
 
 ## Arte
 - Gerada por `kit/render.py` a partir de um JSON (ver campos no topo do script). JPEG 1080x1350 (4:5).
-- Cores por pilar já definidas no script. Ilustrações: `onibus`, `van`, `aeroporto`, `escolar`.
+- Visual corporativo: fundo claro, logo oficial (`kit/logo.png`, tirado do site) no topo, tipografia DM Sans, bloco inferior azul-marinho com grafismo de rota e rodapé com site e @.
+- Paleta oficial do logo: azul #2A5B87, laranja #F1A205, marinho #12324F. Não usar ilustrações, mascotes, emojis ou cores fora da paleta na arte.
+- Tom do texto da arte: sóbrio e direto, sem exclamações nem gírias.

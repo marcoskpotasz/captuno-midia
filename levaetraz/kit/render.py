@@ -10,61 +10,31 @@ Campos do JSON:
   subtitle     1-2 frases
   bullets      lista com 2 a 4 itens curtos
   cta          chamada final (curta)
-  illustration van | onibus | aeroporto | escolar  (opcional; padrão por pilar)
+  (o campo "illustration" é ignorado: o visual usa o logo e um grafismo de rota)
 """
-import html, json, pathlib, sys, shutil, io
+import html, json, pathlib, re, sys, shutil, io
 
 KIT = pathlib.Path(__file__).resolve().parent
 
-THEMES = {
-    "corporativo":    {"bg": "#0E2A47", "accent": "#F5B21B", "glow": "rgba(245,178,27,.14)", "ill": "onibus"},
-    "turismo":        {"bg": "#0B4A5A", "accent": "#FFC64D", "glow": "rgba(255,198,77,.16)", "ill": "van"},
-    "gestao_escolar": {"bg": "#173A2E", "accent": "#8BE28B", "glow": "rgba(139,226,139,.14)", "ill": "escolar"},
+# Paleta oficial (extraída do logo): azul #2A5B87, laranja #F1A205, marinho #12324F.
+# O pilar muda só o traçado do grafismo de rota no bloco inferior.
+ROUTES = {
+    "corporativo":    "M22 90 L250 90 L250 50 L520 50 L520 20 L900 20",
+    "turismo":        "M22 90 C 200 90, 260 20, 460 40 S 720 90, 900 20",
+    "gestao_escolar": "M22 90 L180 90 L180 55 L400 55 L400 85 L640 85 L640 20 L900 20",
 }
 
-def wheel(cx, cy, r=34):
-    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="#0b1726"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="{r*0.45:.0f}" fill="#cfd6df"/>')
-
-def vehicle(kind, accent):
-    if kind == "onibus":
-        body = (
-            '<rect x="20" y="40" width="520" height="190" rx="28" fill="#ffffff"/>'
-            f'<rect x="20" y="168" width="520" height="22" fill="{accent}"/>'
-            + "".join(f'<rect x="{60+i*92}" y="66" width="76" height="72" rx="10" fill="#9fd3ef"/>' for i in range(4))
-            + '<rect x="440" y="66" width="76" height="72" rx="10" fill="#9fd3ef"/><rect x="500" y="150" width="0" height="0"/>'
-            '<rect x="24" y="200" width="20" height="14" rx="4" fill="#ffd27a"/>'
-            + wheel(120, 236) + wheel(440, 236)
-        )
-        return f'<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">{body}</svg>'
-    if kind in ("van", "aeroporto", "escolar"):
-        stripe = accent
-        extra = ""
-        if kind == "aeroporto":
-            extra = ('<g transform="translate(330,-10) rotate(-12)">'
-                     '<path d="M0 40 L150 30 L190 38 L150 48 L0 46 Z" fill="#ffffff" opacity=".9"/>'
-                     '<path d="M80 36 L50 0 L72 0 L120 34 Z" fill="#ffffff" opacity=".9"/>'
-                     '<path d="M84 46 L58 80 L80 80 L122 46 Z" fill="#ffffff" opacity=".9"/></g>')
-        if kind == "escolar":
-            extra = ('<g transform="translate(410,0)">'
-                     '<rect x="0" y="0" width="120" height="90" rx="14" fill="#ffffff"/>'
-                     f'<rect x="14" y="16" width="60" height="10" rx="5" fill="{accent}"/>'
-                     '<rect x="14" y="36" width="92" height="8" rx="4" fill="#c8d3dd"/>'
-                     '<rect x="14" y="52" width="72" height="8" rx="4" fill="#c8d3dd"/>'
-                     f'<circle cx="98" cy="70" r="12" fill="{accent}"/></g>')
-        body = (
-            extra +
-            '<path d="M30 230 L30 120 Q30 92 58 90 L360 84 Q392 84 414 106 L486 170 Q520 176 526 200 L526 230 Z" fill="#ffffff"/>'
-            '<path d="M372 104 L440 166 L372 166 Z" fill="#9fd3ef"/>'
-            + "".join(f'<rect x="{62+i*82}" y="110" width="66" height="54" rx="9" fill="#9fd3ef"/>' for i in range(4))
-            + f'<rect x="30" y="182" width="496" height="18" fill="{stripe}"/>'
-            '<rect x="506" y="206" width="20" height="12" rx="4" fill="#ffd27a"/>'
-            + wheel(130, 232) + wheel(420, 232)
-        )
-        return f'<svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">{body}</svg>'
-    raise ValueError(f"ilustração desconhecida: {kind}")
-
-CHECK = '<svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" stroke="#10233b" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+def graphic(pilar):
+    grid = "".join(f'<line x1="{x}" y1="0" x2="{x}" y2="110" stroke="#ffffff" stroke-opacity=".07"/>' for x in range(0, 921, 46))
+    grid += "".join(f'<line x1="0" y1="{y}" x2="920" y2="{y}" stroke="#ffffff" stroke-opacity=".07"/>' for y in range(5, 110, 35))
+    d = ROUTES.get(pilar, ROUTES["corporativo"])
+    pts = re.findall(r"(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)", d)
+    (x0, y0), (x1, y1) = pts[0], pts[-1]
+    return (grid
+        + f'<path d="{d}" fill="none" stroke="#2A5B87" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>'
+        + f'<path d="{d}" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="10 12"/>'
+        + f'<circle cx="{x0}" cy="{y0}" r="12" fill="#12324F" stroke="#ffffff" stroke-width="4"/>'
+        + f'<circle cx="{x1}" cy="{y1}" r="16" fill="#F1A205"/><circle cx="{x1}" cy="{y1}" r="6" fill="#12324F"/>')
 
 def safe(text):
     # escapa tudo e reabilita apenas <em> e <br>
@@ -74,15 +44,14 @@ def safe(text):
     return t
 
 def build_html(post):
-    th = THEMES[post["pilar"]]
     plain_title = post["title"].replace("<em>", "").replace("</em>", "")
     n = len(plain_title)
-    title_size = "84px" if n <= 34 else "74px" if n <= 48 else "64px" if n <= 64 else "56px"
-    bullets = "".join(f'<li><span class="ck">{CHECK}</span><span>{safe(b)}</span></li>' for b in post.get("bullets", [])[:4])
+    title_size = "78px" if n <= 34 else "70px" if n <= 48 else "62px" if n <= 64 else "54px"
+    items = post.get("bullets", [])[:4]
+    bullets = "".join(f'<div class="item"><span class="n">{i+1:02d}</span><span class="t">{safe(b)}</span></div>' for i, b in enumerate(items))
     tpl = (KIT / "template.html").read_text(encoding="utf-8")
     rep = {
-        "bg": th["bg"], "accent": th["accent"], "glow": th["glow"], "title_size": title_size,
-        "illustration": vehicle(post.get("illustration") or th["ill"], th["accent"]),
+        "title_size": title_size, "graphic": graphic(post["pilar"]),
         "chip": safe(post["chip"]), "title": safe(post["title"]), "subtitle": safe(post["subtitle"]),
         "bullets": bullets, "cta": safe(post["cta"]),
     }
