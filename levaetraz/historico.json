@@ -4,13 +4,29 @@
     "pilar": "corporativo",
     "title": "Sua equipe chega no horário. Todos os dias.",
     "arquivo": "levaetraz/posts/2026-11-24-fretamento-corporativo.jpg",
-    "media_id": "18000767181102260"
+    "media_id": "18000767181102260",
+    "status": "arquivado (substituído pela versão v2 em 2026-11-26)"
   },
   {
     "data": "2026-11-25",
     "pilar": "turismo",
     "title": "Viagem de fim de ano sem estresse até Guarulhos",
     "arquivo": "levaetraz/posts/2026-11-25-transfer-guarulhos-fim-de-ano.jpg",
-    "media_id": "18120363395015899"
+    "media_id": "18120363395015899",
+    "status": "arquivado (substituído pela versão v2 em 2026-11-26)"
+  },
+  {
+    "data": "2026-11-26",
+    "pilar": "corporativo",
+    "title": "Sua equipe chega no horário. Todos os dias.",
+    "arquivo": "levaetraz/posts/2026-11-24-fretamento-corporativo-v2.jpg",
+    "media_id": "18121956766788140"
+  },
+  {
+    "data": "2026-11-26",
+    "pilar": "turismo",
+    "title": "Viagem de fim de ano sem estresse até Guarulhos",
+    "arquivo": "levaetraz/posts/2026-11-25-transfer-guarulhos-fim-de-ano-v2.jpg",
+    "media_id": "18032263778863040"
   }
 ]
