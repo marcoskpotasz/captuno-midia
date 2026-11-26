@@ -1,0 +1,14 @@
+[
+  {"arquivo": "frota-vans-externo.jpg", "descricao": "Três vans da frota estacionadas, vista externa (foto panorâmica, baixa)", "usar_em": ["corporativo", "turismo", "institucional"], "posicao": "center 60%"},
+  {"arquivo": "micro-onibus-externo-logo.jpg", "descricao": "Micro-ônibus prata com o logo Leva e Traz na lateral, em garagem", "usar_em": ["corporativo", "turismo", "institucional"], "posicao": "60% center"},
+  {"arquivo": "onibus-lateral.jpg", "descricao": "Lateral de ônibus prata com faixa azul, em garagem", "usar_em": ["corporativo", "turismo"], "posicao": "center center"},
+  {"arquivo": "onibus-interior-poltronas-logo.jpg", "descricao": "Interior de ônibus com capas de poltrona azuis com o logo Leva e Traz", "usar_em": ["turismo", "corporativo", "institucional"], "posicao": "center 55%"},
+  {"arquivo": "micro-onibus-interior.jpg", "descricao": "Interior de micro-ônibus com poltronas estofadas e cortinas", "usar_em": ["corporativo", "turismo"], "posicao": "center center"},
+  {"arquivo": "van-executiva-interior-tv.jpg", "descricao": "Interior de van executiva com TV e poltronas, porta aberta", "usar_em": ["turismo", "corporativo", "eventos"], "posicao": "center 40%"},
+  {"arquivo": "van-poltronas-giratorias.jpg", "descricao": "Van com duas poltronas individuais e teto solar, porta traseira aberta", "usar_em": ["corporativo", "eventos", "aeroporto"], "posicao": "center center"},
+  {"arquivo": "van-poltronas-couro.jpg", "descricao": "Close de poltronas individuais de minivan executiva", "usar_em": ["corporativo", "aeroporto", "eventos"], "posicao": "center 45%"},
+  {"arquivo": "van-interior-corredor.jpg", "descricao": "Interior de van com fileiras de poltronas e TV ao fundo", "usar_em": ["turismo", "corporativo"], "posicao": "center center"},
+  {"arquivo": "van-cabine-motorista.jpg", "descricao": "Cabine do motorista de van, painel e volante", "usar_em": ["corporativo", "turismo", "conteudo_seguranca"], "posicao": "center center"},
+  {"arquivo": "van-escolar-interior-1.jpg", "descricao": "Interior de van com faixa amarela de transporte escolar", "usar_em": ["gestao_escolar"], "posicao": "center center"},
+  {"arquivo": "van-escolar-interior-2.jpg", "descricao": "Interior de van com faixa amarela de transporte escolar, porta lateral aberta", "usar_em": ["gestao_escolar"], "posicao": "center center"}
+]
